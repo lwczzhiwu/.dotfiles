@@ -1,0 +1,20 @@
+[user]
+    name = way.liu
+    email = lwczzhiwu@outlook.com
+[color]
+    diff = auto
+    status = auto
+    ui = true
+[alias]
+    st = status
+    ci = commit
+    df = diff
+    co = checkout
+    br = branch
+    lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+[diff]
+    tool = vimdiff
+
+[core]
+    #whitespace = cr-at-eol
