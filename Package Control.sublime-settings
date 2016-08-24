@@ -1,0 +1,37 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"1337 Color Scheme",
+		"Block Cursor Everywhere",
+		"BracketHighlighter",
+		"ConvertToUTF8",
+		"Emmet",
+		"FileDiffs",
+		"FileZilla SFTP Import",
+		"Git",
+		"GitGutter",
+		"Hide Menu",
+		"HTML-CSS-JS Prettify",
+		"IMESupport",
+		"Javascript Beautify",
+		"Markdown Extended",
+		"Markdown Preview",
+		"More Layouts",
+		"Package Control",
+		"Pretty JSON",
+		"Pylinter",
+		"Python PEP8 Autoformat",
+		"SFTP",
+		"SideBarFolders",
+		"SublimeCodeIntel",
+		"SublimeEnhancedUtilitiesSet",
+		"Theme - Soda",
+		"View In Browser",
+		"Vintageous",
+		"Xdebug Client"
+	]
+}
