@@ -1,0 +1,25 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Firefox Developer Edition
+Icon=firefox-aurora
+Path=/opt/firefox
+Exec=/opt/firefox/firefox --class="firefox-developer" -P dev-edition-default %u
+StartupNotify=true
+StartupWMClass=firefox-developer
+X-UnityGenerated=false
+Actions=NewWindow;NewPrivateWindow;
+Categories=GNOME;GTK;Network;WebBrowser;
+Terminal=false
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Path=/opt/firefox
+Exec=/opt/firefox/firefox -new-window --class="firefox-developer" -P dev-edition-default
+
+[Desktop Action NewPrivateWindow]
+Name=Open a New Private Window
+Path=/opt/firefox
+Exec=/opt/firefox/firefox -private-window --class="firefox-developer"
