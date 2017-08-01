@@ -1,22 +1,14 @@
-"==========================================
-" ProjectLink: https://github.com/wklken/vim-for-server
-" Author:  wklken
-" Version: 0.2
-" Email: wklken@yeah.net
-" BlogPost: http://www.wklken.me
-" Donation: http://www.wklken.me/pages/donation.html
-" ReadMe: README.md
-" Last_modify: 2015-07-07
-" Desc: simple vim config for server, without any plugins.
-"==========================================
+
+" =============================================================================
+" Author: lwczzhiwu
+" Last_modify: 2017-08-01
+" =============================================================================
+" The configures of vim was originally stealed from
+" https://github.com/wklken/vim-for-server
+" =============================================================================
 
 
-"==========================================
-" Editor: newway
-" Last_modify: 2017-07-28
-"==========================================
-
-" ============================ Plugins ============================
+" ============================= Plugins =======================================
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -29,22 +21,17 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'nathanaelkane/vim-indent-guides'
-
-Plugin 'liuchengxu/eleline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 
 " nathanaelkane/vim-indent-guides setting
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1 
 
 
-" ============================ basic setting ============================
-
+" ============================= basic setting ==================================
 " leader
 let mapleader=','
 let g:mapleader=','
@@ -60,7 +47,6 @@ set history=2000
 " Enable filetype plugins
 " filetype plugin on
 " filetype indent on
-
 
 " base
 " set nocompatible                " don't bother with vi compatibility
@@ -78,15 +64,12 @@ set visualbell t_vb=            " turn off error beep/flash
 au GuiEnter * set t_vb=
 set tm=500
 
-
 " show location
 " set cursorcolumn
 set cursorline
 
-
 " movement
 set scrolloff=7                 " keep 3 lines when scrolling
-
 
 " show
 set ruler                       " show the current row and column
@@ -100,14 +83,11 @@ set matchtime=2                 " tenths of a second to show the matching parent
 set list                        " show tabs and Highlight problematic whitespace
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
   
-
-
 " search
 set hlsearch                    " highlight searches
 set incsearch                   " do incremental searching, search as you type
 set ignorecase                  " ignore case when searching
 set smartcase                   " no ignorecase if Uppercase char present
-
 
 " tab
 set expandtab                   " expand tabs to spaces
@@ -163,12 +143,11 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" NOT SUPPORT
 " Enable basic mouse behavior such as resizing buffers.
 " set mouse=a
 
 
-" ============================ theme and status line ============================
+" ============================= theme and status line =========================
 
 " theme
 set background=dark
@@ -178,11 +157,10 @@ colorscheme space-vim-dark
 set guifont=YaHei\ Consolas\ Hybrid\ 12
 if has("gui_running")         " gui window setting
   set lines=999 columns=999   " max window
-  set guioptions-=m           " hidden menu bar 
+  " set guioptions-=m           " hidden menu bar
   set guioptions-=T           " hidden tool bar
   set guioptions-=r           " hidden right scrol bar
 endif
-
 
 " set mark column color
 hi! link SignColumn   LineNr
@@ -190,11 +168,37 @@ hi! link ShowMarksHLl DiffAdd
 hi! link ShowMarksHLu DiffChange
 
 " status line
-set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+set noshowmode
+
+" get the edit mode
+function! EditMode()
+    redraw
+    let l:mode = mode()
+
+    if mode ==# "n"
+        return "NORMAL"
+    elseif mode ==# "i"
+        return "INSERT"
+    elseif mode ==# "R"
+        return "REPLACE"
+    elseif mode ==# "v"
+        return "VISUAL"
+    elseif mode ==# "V"
+        return "V-LINE"
+    elseif mode ==# "^V"
+        return "V-BLOCK"
+    else
+        return l:mode
+    endif
+endfunc
+
+" statusline format: edit mode, buffer and window number, file permission, file type
+                   " file path, file format, file encoding, cursor position
+set statusline=%{EditMode()}\ [B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
 
-" ============================ specific file type ===========================
+" ============================= specific file type ============================
 
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
@@ -226,7 +230,8 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-" ============================ key map ============================
+
+" ============================= key map =======================================
 
 nnoremap k gk
 nnoremap gk k
