@@ -168,33 +168,10 @@ hi! link ShowMarksHLl DiffAdd
 hi! link ShowMarksHLu DiffChange
 
 " status line
-set noshowmode
-
-" get the edit mode
-function! EditMode()
-    redraw
-    let l:mode = mode()
-
-    if mode ==# "n"
-        return "NORMAL"
-    elseif mode ==# "i"
-        return "INSERT"
-    elseif mode ==# "R"
-        return "REPLACE"
-    elseif mode ==# "v"
-        return "VISUAL"
-    elseif mode ==# "V"
-        return "V-LINE"
-    elseif mode ==# "^V"
-        return "V-BLOCK"
-    else
-        return l:mode
-    endif
-endfunc
-
-" statusline format: edit mode, buffer and window number, file permission, file type
+" statusline format: buffer and window number, file permission, file type
                    " file path, file format, file encoding, cursor position
-set statusline=%{EditMode()}\ [B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P
+"
+set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
 
@@ -305,4 +282,3 @@ cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
