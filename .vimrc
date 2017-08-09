@@ -1,7 +1,7 @@
 
 " =============================================================================
 " Author: lwczzhiwu
-" Last_modify: 2017-08-01
+" Last_modify: 2017-08-09
 " =============================================================================
 " The configures of vim was originally stealed from
 " https://github.com/wklken/vim-for-server
@@ -13,6 +13,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" https://github.com/VundleVim/Vundle.Vim
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -22,6 +23,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'vim-syntastic/syntastic'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -29,6 +32,13 @@ filetype plugin indent on    " required
 " nathanaelkane/vim-indent-guides setting
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1 
+
+" vim-syntastic/syntastic setting
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_stl_format = "[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]"
 
 
 " ============================= basic setting ==================================
@@ -134,6 +144,13 @@ set wildmenu                           " show a navigable menu for tab completio
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
+" complete some symbol
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+
 " others
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
@@ -172,6 +189,7 @@ hi! link ShowMarksHLu DiffChange
                    " file path, file format, file encoding, cursor position
 "
 set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P
+set statusline+=\ %{SyntasticStatuslineFlag()}
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
 
@@ -220,14 +238,38 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-nnoremap <F2> :set nu! nu?<CR>
-nnoremap <F3> :set list! list?<CR>
-nnoremap <F4> :set wrap! wrap?<CR>
-set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
+nnoremap <F10> :set nu! nu?<CR>
+nnoremap <F9> :set list! list?<CR>
+nnoremap <F8> :set wrap! wrap?<CR>
+set pastetoggle=<F7>            "    when in insert mode, press <F5> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
 au InsertLeave * set nopaste
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!time java %<"
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec "!time python2.7 %"
+    elseif &filetype == 'html'
+        exec "!firefox % &"
+    elseif &filetype == 'go'
+        " exec "!go build %<"
+        exec "!time go run %"
+    endif
+endfunc
 
 " kj equal Esc
 inoremap kj <Esc>
