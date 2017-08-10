@@ -45,6 +45,7 @@ let g:ale_lint_on_enter = 0
 
 
 " ============================= basic setting ==================================
+
 " leader
 let mapleader=','
 let g:mapleader=','
@@ -95,7 +96,7 @@ set showmatch                   " jump to matches when entering parentheses
 set matchtime=2                 " tenths of a second to show the matching parenthesis
 set list                        " show tabs and Highlight problematic whitespace
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
-  
+
 " search
 set hlsearch                    " highlight searches
 set incsearch                   " do incremental searching, search as you type
@@ -210,8 +211,7 @@ function! AutoSetFileHead()
 
     " python
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
-        call append(1, "\# encoding: utf-8")
+        call setline(1, "\# -*- coding: utf-8 -*-")
     endif
 
     normal G
@@ -235,6 +235,16 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
+noremap H ^
+noremap L $
+
+" disable direction key
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+
+" fast jump to other window
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -243,7 +253,7 @@ map <C-l> <C-W>l
 nnoremap <F10> :set nu! nu?<CR>
 nnoremap <F9> :set list! list?<CR>
 nnoremap <F8> :set wrap! wrap?<CR>
-set pastetoggle=<F7>            "    when in insert mode, press <F5> to go to
+set pastetoggle=<F7>            "    when in insert mode, press <F7> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
 au InsertLeave * set nopaste
