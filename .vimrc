@@ -23,7 +23,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 
 
 call vundle#end()            " required
@@ -33,12 +33,15 @@ filetype plugin indent on    " required
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1 
 
-" vim-syntastic/syntastic setting
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_stl_format = "[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]"
+" w0rp/ale setting
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
 
 " ============================= basic setting ==================================
@@ -187,9 +190,8 @@ hi! link ShowMarksHLu DiffChange
 " status line
 " statusline format: buffer and window number, file permission, file type
                    " file path, file format, file encoding, cursor position
-"
-set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P
-set statusline+=\ %{SyntasticStatuslineFlag()}
+
+set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P\ %{ALEGetStatusLine()}
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
 
