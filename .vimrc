@@ -26,6 +26,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'w0rp/ale'
 
 
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -34,14 +35,14 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1 
 
 " w0rp/ale setting
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'
+let g:ale_sign_error='✗'
+let g:ale_sign_warning='⚡'
+let g:ale_echo_msg_error_str='E'
+let g:ale_echo_msg_warning_str='W'
+let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
+let g:ale_statusline_format=['✗ %d', '⚡ %d', '✔ OK']
 
 
 " ============================= basic setting ==================================
@@ -177,8 +178,10 @@ colorscheme space-vim-dark
 
 set guifont=YaHei\ Consolas\ Hybrid\ 12
 if has("gui_running")         " gui window setting
-  set lines=999 columns=999   " max window
-  " set guioptions-=m           " hidden menu bar
+  "set lines=999 columns=999   " max window
+  set lines=42 columns=178
+  autocmd GUIEnter * winpos 157 78
+  set guioptions-=m           " hidden menu bar
   set guioptions-=T           " hidden tool bar
   set guioptions-=r           " hidden right scrol bar
 endif
