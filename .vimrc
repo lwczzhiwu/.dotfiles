@@ -32,17 +32,19 @@ filetype plugin indent on    " required
 
 " nathanaelkane/vim-indent-guides setting
 let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=1 
+let g:indent_guides_guide_size=1
 
 " w0rp/ale setting
-let g:ale_lint_on_enter=0
+let g:ale_enabled=0
 let g:ale_lint_on_text_changed='never'
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_save=0
 let g:ale_sign_error='✗'
 let g:ale_sign_warning='⚡'
 let g:ale_echo_msg_error_str='E'
 let g:ale_echo_msg_warning_str='W'
 let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
-let g:ale_statusline_format=['✗ %d', '⚡ %d', '✔ OK']
+let g:ale_statusline_format=['✗ %d', '⚡ %d', '- cz']
 
 
 " ============================= basic setting ==================================
