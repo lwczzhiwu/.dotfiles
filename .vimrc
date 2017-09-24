@@ -23,7 +23,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'auto-pairs'
 Plugin 'w0rp/ale'
+Plugin 'maralla/completor.vim'
 
 
 
@@ -152,11 +154,11 @@ set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
 " complete some symbol
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
+" inoremap ' ''<ESC>i
+" inoremap " ""<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap [ []<ESC>i
+" inoremap { {}<ESC>i
 
 " others
 set backspace=indent,eol,start  " make that backspace key work the way it should
