@@ -153,13 +153,6 @@ set wildmenu                           " show a navigable menu for tab completio
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
-" complete some symbol
-" inoremap ' ''<ESC>i
-" inoremap " ""<ESC>i
-" inoremap ( ()<ESC>i
-" inoremap [ []<ESC>i
-" inoremap { {}<ESC>i
-
 " others
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
@@ -178,7 +171,9 @@ endif
 " theme
 set background=dark
 " colorscheme desert
-colorscheme space-vim-dark
+" colorscheme space-vim-dark
+colorscheme NeoSolarized
+set termguicolors
 
 set guifont=YaHei\ Consolas\ Hybrid\ 12
 if has("gui_running")         " gui window setting
@@ -202,6 +197,19 @@ hi! link ShowMarksHLu DiffChange
 set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P\ %{ALEGetStatusLine()}
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
+
+" Change cursor shape in different modes
+" from http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+if has("autocmd")
+    au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+        au InsertEnter,InsertChange *
+            \ if v:insertmode == 'i' |
+            \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+            \ elseif v:insertmode == 'r' |
+            \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+            \ endif
+    au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
 
 " ============================= specific file type ============================
 
@@ -236,6 +244,8 @@ endfun
 
 
 " ============================= key map =======================================
+
+nnoremap <leader>t :Ex<CR>
 
 nnoremap k gk
 nnoremap gk k
