@@ -194,7 +194,7 @@ hi! link ShowMarksHLu DiffChange
 " statusline format: buffer and window number, file permission, file type
                    " file path, file format, file encoding, cursor position
 
-set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%l,%c%V]\ %P\ %{ALEGetStatusLine()}
+set statusline=[B-%n\ W-%{winnr()}]\ %r%y\ %F%=[%{&ff}]\ [%{(&fenc!=''?&fenc:&enc)}%{(&bomb?\",BOM\":\"\")}]\ [%L:%l,%v]\ %P\ %{ALEGetStatusLine()}
 set laststatus=2   " Always show the status line - use 2 lines for the status bar
 
 
